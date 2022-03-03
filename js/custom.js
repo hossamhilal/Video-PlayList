@@ -77,7 +77,5 @@ function clicked(element){
     $('.VidTitle').text(vidName);
     let vidTime = $(element).data('duration');
     $('.vidDuration').text(vidTime);
-    console.log({vidName})
-    console.log({vidTime})
 }
 
