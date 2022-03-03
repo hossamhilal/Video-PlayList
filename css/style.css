@@ -1,0 +1,163 @@
+/*=================================================================================*/
+/*=================================================================================*/
+/*==========================||---------------------------||========================*/
+/*==========================|| DESIGNED BY  HOSSAM HILAL ||========================*/
+/*==========================||---------------------------||========================*/
+/*====================================||------||===================================*/
+/*====================================|| 2022 ||===================================*/
+/*====================================||------||===================================*/
+/*=================================================================================*/
+/*=================================================================================*/
+
+
+body {
+    background: #f2f2f2;
+}
+
+.VideosPlayList {
+    padding: 50px 0;
+}
+
+.title {
+    text-transform: uppercase;
+    font-size: 50px;
+    margin-bottom: 20px;
+    letter-spacing: 7px;
+    background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.videoPlayer {
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.mainVideo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+}
+
+.playlistBx {
+    background: #002333;
+    color: #fff;
+}
+
+.playlistHead {
+    background: linear-gradient(90deg, #f30a40 0%, #5c0018 100%);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.count {
+    font-size: 22px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.listTitle {
+    font-size: 20px;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.playlist {
+    padding: 0;
+    margin: 0;
+    height: 400px;
+    overflow: auto;
+}
+
+.playlist::-webkit-scrollbar
+{
+   width: 7px;
+}
+
+.playlist::-webkit-scrollbar-thumb
+{
+   height: 50px;
+   background: #375666;
+   border: 5px solid transparent;
+   border-radius: 5px;
+}
+
+.playlist::-webkit-scrollbar-thumb:active
+{
+    background: #f30a40;
+}
+
+.playlist li {
+    position: relative;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #002738;
+    cursor: pointer;
+}
+
+.playing {
+    color: #f99922;
+}
+
+.playlist li:hover {
+    color: #f30a40;
+}
+
+.playlist video {
+    display: none;
+}
+
+.playlist label {
+    margin: 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.playlist label:before {
+    content: "\eca7";
+    font-family: IcoFont!important;
+    margin-inline-end: 5px;
+}
+
+.playlist .playing label::before {
+    content: '\ecb0';
+}
+
+.videoDescription {
+    padding: 20px 0;
+}
+
+.VidTitle {
+    color: #002333;
+}
+
+.VidTitle::before {
+    content:'\ecb4';
+    color: #09009f;
+    font-family: IcoFont!important;
+}
+
+.videoDescription h5 {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #777;
+}
+
+.videoDescription i {
+    color: #09009f;
+    font-size: 25px;
+    margin-inline-end: 5px;
+}
+
+.vidDuration {
+    color: #f99922;
+}
