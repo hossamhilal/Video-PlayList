@@ -27,8 +27,6 @@ for(let i = 0; i < videosList.length; i++){
 
     // adding data duration attribe which we'll use below
     li.setAttribute('data-duration', `${totalMin}:${totalSec}`);         
-
-    // video.addEventListener('loadeddata', ()=>{})  
 }
 
 // Load video of first Index
@@ -45,11 +43,28 @@ function playMusic(){
 
 // Load video of Current Index
 function loadMusic(indexNumb){
-    let vid = videosList[indexNumb- 1];
+    let vid = videosList[indexNumb- 1] ,
+        parentNode = vid.parentNode ,
+        nextLi = parentNode.nextElementSibling;
+
     mainVideo.src = vid.src;
 
-    // Call videoEnded Function
-    mainVideo.addEventListener('ended',videoEnded(vid),false);
+    // videoEnded Function
+    mainVideo.onended = function() {
+        $('.dialog').css('display' , 'flex');
+        
+        // Dialog Button Actions
+        $('.dialogBtn').on('click',(e)=>{
+            let action = e.target.getAttribute('data-action');
+            if(action == 'confirm') {
+                
+                nextLi.click();
+                $('.dialog').hide();
+            } else {
+                $('.dialog').hide();
+            } 
+        })
+    };
 }
 
 // Get particular video Information on click
@@ -74,40 +89,20 @@ function playingNow(){
 
 // Play particular video on click
 function clicked(element){
+    let getIndex = element.getAttribute('data-index') ,
+        vidName = $(element).find('label').text() ,
+        vidTime = $(element).data('duration');
+
     $('.dialog').hide();
-    let getIndex = element.getAttribute('data-index');
+    // Load & play video when clciked 
     videoIndex = getIndex;
     loadMusic(videoIndex);
     playMusic();
     playingNow();
 
-    let vidName = $(element).find('label').text();
+    // Display video information 
     $('.VidTitle').text(vidName);
-    let vidTime = $(element).data('duration');
     $('.vidDuration').text(vidTime);
 }
 
-// Show Dialog when End
-function videoEnded(vid) {
-    $('.dialog').css('display' , 'flex');
-    let parentNode = vid.parentNode; 
-    $('.dialogBtn').on('click',(e)=>{
-        let action = e.target.getAttribute('data-action');
-        // let currentLi = document.querySelector('.playing');
-        // let currentIndex = currentLi.getAttribute('data-index');
-        // console.log({currentIndex})
-        // let nextIndex = parseInt(currentIndex)+ 1;
-        // console.log({nextIndex})
-        if(action == 'confirm') {
-            // let nextLi = document.querySelector(`li[data-index='${nextIndex}']`);
-            // console.log({nextLi})
-            console.log(parentNode.nextElementSibling)
-            let nextLi = parentNode.nextElementSibling;
-            nextLi.click();
-            $('.dialog').hide();
-        } else {
-            $('.dialog').hide();
-        } 
-    })
-}
 
