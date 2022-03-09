@@ -11,20 +11,25 @@ $('.count').text(videosList.length);
 for(let i = 0; i < videosList.length; i++){
     let video = videosList[i];
     let li = video.parentElement;
-    video.addEventListener('loadeddata', ()=>{
-        let duration = video.duration;
-        let totalMin = Math.floor(duration / 60);
-        let totalSec = Math.floor(duration % 60);
-        
-        // if totalSec is less then 10 then add 0 at the beginging
-        totalSec < 10 ? totalSec = "0"+ totalSec : totalSec ;
+    let videoDuration = li.querySelector('.videoDuration');
+    let vidSrc = video.src;
+    let duration = video.duration;
+    let totalMin = Math.floor(duration / 60);
+    let totalSec = Math.floor(duration % 60);
 
-        let videoDuration = li.querySelector('.videoDuration');
-        videoDuration.innerText = `${totalMin}:${totalSec}`;
+    li.setAttribute('src', vidSrc);
+    li.setAttribute('data-index', `${i + 1}`); 
+
+    // if totalSec is less then 10 then add 0 at the beginging
+    totalSec < 10 ? totalSec = "0"+ totalSec : totalSec ;
+
+    videoDuration.innerText = `${totalMin}:${totalSec}`;
 
         // adding t duration attribe which we'll use below
-        li.setAttribute('data-duration', `${totalMin}:${totalSec}`);
-        li.setAttribute('data-index', `${i + 1}`);
+    li.setAttribute('data-duration', `${totalMin}:${totalSec}`);         
+
+    video.addEventListener('loadeddata', ()=>{
+        
     })  
 }
 
@@ -42,7 +47,11 @@ function playMusic(){
 
 // Load video of Current Index
 function loadMusic(indexNumb){
-    mainVideo.src = videosList[indexNumb - 1].src;
+    let vid = videosList[indexNumb- 1];
+    mainVideo.src = vid.src;
+
+    // Call videoEnded Function
+    mainVideo.addEventListener('ended',videoEnded,false);
 }
 
 // Get particular video Information on click
@@ -67,6 +76,7 @@ function playingNow(){
 
 // Play particular video on click
 function clicked(element){
+    $('.dialog').hide();
     let getIndex = element.getAttribute('data-index');
     videoIndex = getIndex;
     loadMusic(videoIndex);
@@ -77,5 +87,26 @@ function clicked(element){
     $('.VidTitle').text(vidName);
     let vidTime = $(element).data('duration');
     $('.vidDuration').text(vidTime);
+}
+
+// Show Dialog when End
+function videoEnded(e) {
+    $('.dialog').css('display' , 'flex');
+    $('.dialogBtn').on('click',(e)=>{
+        let action = e.target.getAttribute('data-action');
+        if(action == 'confirm') {
+            let currentLi = document.querySelector('.playing');
+            let currentIndex = currentLi.getAttribute('data-index');
+            console.log({currentIndex})
+            let nextIndex = parseInt(currentIndex)+ 1;
+            console.log({nextIndex})
+            let nextLi = document.querySelector(`li[data-index='${nextIndex}']`);
+            console.log({nextLi})
+            nextLi.click();
+            $('.dialog').hide();
+        } else {
+            $('.dialog').hide();
+        } 
+    })
 }
 
