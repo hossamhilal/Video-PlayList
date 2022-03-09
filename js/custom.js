@@ -45,26 +45,24 @@ function playMusic(){
 function loadMusic(indexNumb){
     let vid = videosList[indexNumb- 1] ,
         parentNode = vid.parentNode ,
-        nextLi = parentNode.nextElementSibling;
+        nextLi = parentNode.nextElementSibling ,
+        listLength = videosList.length ,
+        playedIndex = parseInt(indexNumb);
 
     mainVideo.src = vid.src;
 
     // videoEnded Function
     mainVideo.onended = function() {
-        $('.dialog').css('display' , 'flex');
+        playedIndex != listLength ? $('.dialog').css('display' , 'flex') : $('.dialog').hide();
         
         // Dialog Button Actions
         $('.dialogBtn').on('click',(e)=>{
             let action = e.target.getAttribute('data-action');
-            if(action == 'confirm') {
-                
-                nextLi.click();
-                $('.dialog').hide();
-            } else {
-                $('.dialog').hide();
-            } 
+            action == 'confirm' ?  nextLi.click() : $('.dialog').hide();
+            $('.dialog').hide()
         })
     };
+    
 }
 
 // Get particular video Information on click
