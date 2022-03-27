@@ -29,6 +29,31 @@ for(let i = 0; i < videosList.length; i++){
     li.setAttribute('data-duration', `${totalMin}:${totalSec}`);         
 }
 
+var interv = setInterval(function() {
+    for(let i = 0; i < videosList.length; i++){
+        let video = videosList[i],
+            li = video.parentElement,
+            videoDuration = li.querySelector('.videoDuration'),
+            vidSrc = video.src,
+            duration = video.duration,
+            totalMin = Math.floor(duration / 60),
+            totalSec = Math.floor(duration % 60);
+    
+        li.setAttribute('src', vidSrc);
+        li.setAttribute('data-index', `${i + 1}`); 
+    
+        // if totalSec is less then 10 then add 0 at the beginging
+        totalSec < 10 ? totalSec = "0"+ totalSec : totalSec ;
+    
+        videoDuration.innerText = `${totalMin}:${totalSec}`;
+    
+        // adding data duration attribe which we'll use below
+        li.setAttribute('data-duration', `${totalMin}:${totalSec}`);  
+        
+        clearInterval(interv);
+    }
+}, 50);
+
 // Load video of first Index
 let videoIndex = 1;
 window.addEventListener('load',()=>{
