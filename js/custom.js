@@ -1,8 +1,8 @@
 /*global $ */
 
-const mainVideo = document.querySelector('#mainVideo'),
-      playlist = document.getElementById('playlist');
-let videosList = [... document.getElementsByClassName('videoItem')];
+let mainVideo = document.querySelector('#mainVideo'),
+    playlist = document.getElementById('playlist') ,
+    videosList = [... document.getElementsByClassName('videoItem')];
 
 // Get Total Videos Number
 $('.count').text(videosList.length);
