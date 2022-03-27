@@ -8,28 +8,7 @@ let mainVideo = document.querySelector('#mainVideo'),
 $('.count').text(videosList.length);
 
 // Get Length for Each Video
-// for(let i = 0; i < videosList.length; i++){
-//     let video = videosList[i],
-//         li = video.parentElement,
-//         videoDuration = li.querySelector('.videoDuration'),
-//         vidSrc = video.src,
-//         duration = video.duration,
-//         totalMin = Math.floor(duration / 60),
-//         totalSec = Math.floor(duration % 60);
-
-//     li.setAttribute('src', vidSrc);
-//     li.setAttribute('data-index', `${i + 1}`); 
-
-//     // if totalSec is less then 10 then add 0 at the beginging
-//     totalSec < 10 ? totalSec = "0"+ totalSec : totalSec ;
-
-//     videoDuration.innerText = `${totalMin}:${totalSec}`;
-
-//     // adding data duration attribe which we'll use below
-//     li.setAttribute('data-duration', `${totalMin}:${totalSec}`);         
-// }
-
-var interv = setInterval(function() {
+let interv = setInterval(function() {
     for(let i = 0; i < videosList.length; i++){
         let video = videosList[i],
             vidSrc = video.src,
@@ -44,12 +23,12 @@ var interv = setInterval(function() {
     
         // if totalSec is less then 10 then add 0 at the beginging
         totalSec < 10 ? totalSec = "0"+ totalSec : totalSec ;
+        FDuration = `${totalMin}:${totalSec}`;
     
-        videoDuration.innerText = `${totalMin}:${totalSec}`;
-        console.log({videoDuration})
+        videoDuration.innerText = FDuration ;
     
         // adding data duration attribe which we'll use below
-        li.setAttribute('data-duration', `${totalMin}:${totalSec}`);  
+        li.setAttribute('data-duration', FDuration);  
         
         // clearInterval(interv);
     }
