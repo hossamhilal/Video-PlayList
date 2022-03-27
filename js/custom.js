@@ -32,12 +32,12 @@ $('.count').text(videosList.length);
 var interv = setInterval(function() {
     for(let i = 0; i < videosList.length; i++){
         let video = videosList[i],
-            li = video.parentElement,
-            videoDuration = li.querySelector('.videoDuration'),
             vidSrc = video.src,
             duration = video.duration,
             totalMin = Math.floor(duration / 60),
             totalSec = Math.floor(duration % 60);
+            li = video.parentElement,
+            videoDuration = li.querySelector('.videoDuration'),
     
         li.setAttribute('src', vidSrc);
         li.setAttribute('data-index', `${i + 1}`); 
@@ -46,11 +46,12 @@ var interv = setInterval(function() {
         totalSec < 10 ? totalSec = "0"+ totalSec : totalSec ;
     
         videoDuration.innerText = `${totalMin}:${totalSec}`;
+        console.log({videoDuration})
     
         // adding data duration attribe which we'll use below
         li.setAttribute('data-duration', `${totalMin}:${totalSec}`);  
         
-        clearInterval(interv);
+        // clearInterval(interv);
     }
 }, 50);
 
